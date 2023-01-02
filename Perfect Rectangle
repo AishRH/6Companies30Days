@@ -1,0 +1,45 @@
+class Solution {
+    public boolean isRectangleCover(int[][] rectangles) {
+        Set<String> set=new HashSet<>();
+        int minX=Integer.MAX_VALUE;
+        int minY=Integer.MAX_VALUE;
+        int maxA=Integer.MIN_VALUE;
+        int maxB=Integer.MIN_VALUE;
+        int area=0;
+
+        for(int []r :rectangles){
+            int x=r[0];
+            int y=r[1];
+            int a=r[2];
+            int b=r[3];
+
+            area+=(a-x)*(b-y);
+            
+            minX=Math.min(x,minX);
+            minY=Math.min(y,minY);
+            maxA=Math.max(a,maxA);
+            maxB=Math.max(b,maxB);
+           
+            String p1=x+","+ y;
+            String p2=a+","+y;
+            String p3=x+","+b;
+            String p4=a+","+b;
+
+            String [] points={p1,p2,p3,p4};
+            for(String p:points){
+                if(set.contains(p))
+                set.remove(p);
+                else
+                set.add(p);
+            }
+        }
+
+        
+        if(set.size()!=4||!set.contains(minX+","+minY)||!set.contains(maxA+","+minY)||!set.contains(minX+","+maxB)||!set.contains(maxA+","+maxB) )               return false;
+        int marea=(maxA-minX)*(maxB-minY);
+        if(area==marea){
+            return true;
+        }
+        return false;
+    }
+}
