@@ -1,0 +1,24 @@
+class Solution {
+    int gcd(int [] numsDivide){
+        int gcd=numsDivide[0];
+        for(int i=1;i<numsDivide.length;i++){
+            int num=numsDivide[i];
+            while(num>0){
+                int tmp=gcd%num;
+                gcd=num;
+                num=tmp;
+            }
+        }
+        return gcd;
+    }
+    public int minOperations(int[] nums, int[] numsDivide) {
+       int ans=gcd(numsDivide);
+       Arrays.sort(nums);
+       for(int i=0;i<nums.length;i++){
+          if(ans%nums[i]==0)
+          return i;
+       } 
+       return -1;
+
+    }
+}
