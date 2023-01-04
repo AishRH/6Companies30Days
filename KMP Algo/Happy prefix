@@ -1,0 +1,23 @@
+class Solution {
+    public String longestPrefix(String s) {
+        int lps[]=new int[s.length()];
+        int prev=0;
+        int i=1;
+        while(i<s.length()){
+            if(s.charAt(i)==s.charAt(prev)){
+                lps[i]=prev+1;
+                i++;prev++;
+            }
+            else if(prev>0){
+                prev=lps[prev-1];
+            }
+            else{
+                lps[i]=0;
+                i++;
+            }
+        }
+        int max=lps[s.length()-1];
+        return s.substring(0,max);
+        
+    }
+}
