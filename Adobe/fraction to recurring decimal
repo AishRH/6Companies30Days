@@ -1,0 +1,37 @@
+class Solution {
+    public String fractionToDecimal(int numerator, int denominator) {
+        HashMap <Long,Integer> h=new HashMap<>();
+        StringBuilder res=new StringBuilder();
+        String s="";
+        if (numerator==0)
+        return "0";
+
+        res.append((numerator>0)^(denominator>0)?"-":"");
+        long num=Math.abs((long)numerator);
+         long den=Math.abs((long)denominator);
+
+        res.append(num/den);
+        
+        long rem=num%den;
+        if(rem==0) return res.toString();
+        res.append(".");
+        while(rem!=0 && !h.containsKey(rem)){
+            h.put(rem,res.length());
+            rem=rem*10;
+           res.append(rem/den);
+            rem=rem%den;
+        }
+        if(rem==0){
+           res.append(s);
+           return res.toString();
+        }
+        else if(h.containsKey(rem)){
+            int index=h.get(rem);
+            res.insert(index,"(");
+            res.append(")");
+            return res.toString();
+        }
+        else
+           return res.toString();
+    }
+}
