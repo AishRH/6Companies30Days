@@ -1,0 +1,20 @@
+class Solution {
+    public int numMatchingSubseq(String s, String[] words) {
+       int count=0;
+       for(String word:words){
+          if(check(word,s))
+          count++;
+       }
+       return count; 
+    }
+    boolean check(String word,String s){
+        int prev=0;
+        for(char c:word.toCharArray()){
+            int ind=s.indexOf(c,prev);
+            if(ind==-1)
+            return false;
+            prev=ind+1;
+        }
+        return true;
+    }
+}
