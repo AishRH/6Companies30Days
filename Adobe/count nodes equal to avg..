@@ -1,0 +1,55 @@
+class Solution {
+    
+    int res = 0;
+    
+    public int averageOfSubtree(TreeNode root) {
+        node t = new node(0,0);
+        counting(root);
+        return res;
+    }
+    
+    // recursion method : 
+    private node counting(TreeNode root){
+        
+        // base case :
+        if(root.left == null && root.right == null){
+            node temp = new node(root.val,1);
+            res++;
+            return temp;
+        }
+        node tempLeft = new node(0,0);
+        node tempRight = new node(0,0);
+        
+        // first check left :
+        if(root.left != null){
+            tempLeft = counting(root.left);
+        }
+        
+        // check right :
+        if(root.right != null){
+            tempRight = counting(root.right);
+        }
+        
+        // sum = values of nodes :
+        int sum = tempLeft.sum + tempRight.sum + root.val;
+        // count = number of nodes :
+        int count = tempLeft.count + tempRight.count + 1;
+        
+        if(sum/count == root.val) res++;
+        
+        // return the node :
+        node temp = new node(sum,count);
+        return temp;
+    }
+        
+}
+
+class node{
+    int sum = 0;
+    int count = 0;
+    
+    node(int s, int c){
+        sum = s;
+        count = c;
+    }
+}
