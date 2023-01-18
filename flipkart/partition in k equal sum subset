@@ -1,0 +1,30 @@
+class Solution {
+    public boolean canPartitionKSubsets(int[] nums, int k) {
+        int sum=0;
+        for(int i=0;i<nums.length;i++){
+            sum+=nums[i];
+        }
+        if(sum%k!=0 || nums.length<k)
+        return false;
+        Arrays.sort(nums);
+        int arr[]=new int[k];
+        return find(nums.length-1, arr, nums,sum/k);
+    }
+    boolean find(int i,int bucket[],int nums[],int target){
+        if(i==-1)
+        return true;
+        for(int j=0;j<bucket.length;j++){
+            if(bucket[j]+nums[i]<=target){
+                bucket[j]+=nums[i];
+
+                if(find(i-1,bucket,nums,target)) return true;
+                                bucket[j]-=nums[i];
+
+                
+            }
+            if(bucket[j]==0)
+            break;
+        }
+        return false;
+    }
+}
