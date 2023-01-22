@@ -1,0 +1,30 @@
+class Solution {
+    public String customSortString(String order, String s) {
+        HashMap<Character,Integer> hm=new HashMap<>();
+        for(int i=0;i<s.length();i++){
+            if(hm.containsKey(s.charAt(i)))
+               hm.put(s.charAt(i),hm.get(s.charAt(i))+1);
+            else
+               hm.put(s.charAt(i),1);
+        }
+        String res="";
+        for(int j=0;j<order.length();j++){
+            char ch=order.charAt(j);
+            if(hm.containsKey(ch)){
+                int freq=hm.get(ch);
+                for(int i=0;i<freq;i++){
+                    res+=Character.toString(ch);
+                }
+                hm.remove(ch);
+            }
+        }
+            for(char key:hm.keySet()){
+                int freq=hm.get(key);
+                for(int i=0;i<freq;i++){
+                    res+=Character.toString(key);
+                }
+            }
+            return res;
+        }
+        
+    }
