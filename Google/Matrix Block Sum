@@ -1,0 +1,21 @@
+class Solution {
+    public int[][] matrixBlockSum(int[][] mat, int k) {
+        int [][] ans=new int[mat.length][mat[0].length];
+        for(int i=0;i<mat.length;i++){
+            for(int j=0;j<mat[0].length;j++){
+                ans[i][j]=helper(i,j,k,mat);
+            }
+        }
+        return ans; 
+    }
+    private int helper(int x,int y,int k,int[][]mat){
+        int sum=0;
+        for(int i=0;i<mat.length;i++){
+            for(int j=0;j<mat[0].length;j++){
+                if(i<=x+k && i>=x-k  && j<=y+k && j>=y-k)
+                sum+=mat[i][j];
+            }
+        }
+        return sum;
+    }
+}
